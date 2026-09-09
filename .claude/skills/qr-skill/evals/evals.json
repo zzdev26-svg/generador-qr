@@ -1,0 +1,19 @@
+{
+  "description": "Capability-routing evals for crear-web-micro-saas. Each case: user message → expected capability (and archetype when building). The golden rule under test: do ONLY what was asked.",
+  "cases": [
+    { "input": "conéctame Hostinger para poder subir mis webs", "expect": { "capability": "connect", "must_not": ["build", "publish"] } },
+    { "input": "hazme un generador de códigos QR para restaurantes", "expect": { "capability": "build", "archetype": "generador-qr", "must_not": ["publish"] } },
+    { "input": "quiero una web para comprimir imágenes", "expect": { "capability": "build", "archetype": "compresor-imagenes" } },
+    { "input": "una web que convierta HEIC del iPhone a JPG", "expect": { "capability": "build", "archetype": "conversor-imagenes" } },
+    { "input": "créame un test de velocidad de internet", "expect": { "capability": "build", "archetype": "test-velocidad" } },
+    { "input": "una herramienta para quitar el fondo de fotos", "expect": { "capability": "build", "archetype": "quitar-fondo", "must": ["transformers.js + Xenova/modnet", "NO @imgly (AGPL)", "NO RMBG (non-commercial)"] } },
+    { "input": "una web para unir varios PDF en uno", "expect": { "capability": "build", "archetype": "herramientas-pdf" } },
+    { "input": "una calculadora de hipotecas", "expect": { "capability": "build", "archetype": "calculadora-hipoteca" } },
+    { "input": "¿qué micro-SaaS me recomiendas crear para empezar?", "expect": { "capability": "recommend", "must_not": ["build without confirmation"] } },
+    { "input": "publícala en mi hosting", "expect": { "capability": "publish", "must": ["verify live URL by using the tool"] } },
+    { "input": "cámbiale el color principal a verde", "expect": { "capability": "edit", "must_not": ["rebuild", "publish"] } },
+    { "input": "la subí y sigue saliendo la versión vieja", "expect": { "capability": "verify-cache", "ref": "10-deployment-and-cache.md" } },
+    { "input": "hazme una web con cuentas de usuario y base de datos de clientes", "expect": { "capability": "build", "must": ["explain client-side limits honestly", "propose closest client-side alternative"], "must_not": ["backend", "database", "auth"] } },
+    { "input": "un conversor de voz a texto", "expect": { "capability": "build", "must": ["Web Speech API caveats (no Firefox, server-processed)", "honest support note"] } }
+  ]
+}
